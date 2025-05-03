@@ -6,10 +6,27 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHomeOpen, setIsHomeOpen] = useState(false);
+  const [isListingOpen, setIsListingOpen] = useState(false);
+  const [isPageOpen, setIsPageOpen] = useState(false);
+  const [isBlogOpen, setIsBlogOpen] = useState(false);
 
   return (
     <Router>
-      <OpenContext.Provider value={{ isOpen, setIsOpen }}>
+      <OpenContext.Provider
+        value={{
+          isOpen,
+          setIsOpen,
+          isHomeOpen,
+          setIsHomeOpen,
+          isListingOpen,
+          setIsListingOpen,
+          isPageOpen,
+          setIsPageOpen,
+          isBlogOpen,
+          setIsBlogOpen,
+        }}
+      >
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

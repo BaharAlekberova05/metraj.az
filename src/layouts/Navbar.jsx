@@ -1,19 +1,27 @@
 import { CgMenu } from "react-icons/cg";
 import { OpenContext } from "../contexts/OpenContext";
-import { IoMdClose } from "react-icons/io";
-import { FaAngleDown, FaXTwitter } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa";
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { BiLogoLinkedin } from "react-icons/bi";
 import { FiInstagram } from "react-icons/fi";
+import { IoMdClose } from "react-icons/io";
+import { FaAngleDown, FaAngleUp, FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF } from "react-icons/fa";
 
 const Navbar = () => {
   const { isOpen, setIsOpen } = useContext(OpenContext);
+  const { isHomeOpen, setIsHomeOpen } = useContext(OpenContext);
+  const { isListingOpen, setIsListingOpen } = useContext(OpenContext);
+  const { isPageOpen, setIsPageOpen } = useContext(OpenContext);
+  const { isBlogOpen, setIsBlogOpen } = useContext(OpenContext);
+
+  const handleDropdown = (stateSetter) => {
+    stateSetter((prevState) => !prevState);
+  };
 
   return (
     <div className="h-20 w-full p-4 flex items-center justify-between relative">
-      <div className="w-[40%] h-full">
+      <div className="w-[136px] h-[42px]">
         <img
           src="src/assets/img/logo.png"
           alt="Site logo"
@@ -42,19 +50,19 @@ const Navbar = () => {
 
         <CgMenu
           className="size-6 text-(--custom-color) cursor-pointer"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => handleDropdown(setIsOpen)}
         />
 
         {/* SIDEBAR */}
         <div
-          className={`bg-white z-10 absolute left-0 top-0 h-screen w-[80%] flex flex-col justify-between p-4 transition-all ease-in-out duration-500 transform border-r-[0.8px] border-(--custom-border) ${
+          className={`bg-white z-10 absolute left-0 top-0 h-screen w-[400px] flex flex-col justify-between p-4 transition-all ease-in-out duration-500 transform border-r-[0.8px] border-(--custom-border) ${
             isOpen ? "left-0" : "left-[-100%]"
           }`}
         >
           {/* TOP SIDEBAR */}
           <div>
             <div className="flex items-center justify-between">
-              <div className="w-[40%]">
+              <div className="w-[136px] h-[42px]">
                 <img src="src/assets/img/logo.png" alt="Site logo" />
               </div>
 
@@ -68,78 +76,274 @@ const Navbar = () => {
 
             <nav>
               <ul>
-                <li className="border-b border-(--custom-border) py-2 ">
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      `flex items-center justify-between ${
-                        isActive
-                          ? "text-(--custom-color)"
-                          : "text-(--custom-black)"
-                      }`
-                    }
+                <li className="border-b border-(--custom-border) py-2">
+                  <div
+                    className="flex items-center justify-between cursor-pointer group"
+                    onClick={() => handleDropdown(setIsHomeOpen)}
                   >
-                    Home
-                    <FaAngleDown />
-                  </NavLink>
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) =>
+                        `group-hover:text-(--custom-color) group-hover:transition-all group-hover:duration-100 ${
+                          isActive
+                            ? "text-(--custom-color)"
+                            : "text-(--custom-black)"
+                        }`
+                      }
+                    >
+                      Home
+                    </NavLink>
+                    {isHomeOpen ? <FaAngleUp /> : <FaAngleDown />}
+                  </div>
+
+                  <div
+                    className={`${
+                      isHomeOpen
+                        ? "max-h-full opacity-100"
+                        : "max-h-0 opacity-0"
+                    } overflow-hidden transition-all duration-300 ease-in-out  pl-4 mt-2 flex flex-col space-y-1 border-l-[0.8px] border-l-(--custom-border)`}
+                  >
+                    <NavLink
+                      to="/home1"
+                      className={`hover:text-(--custom-color) duration-100 ${
+                        isHomeOpen
+                          ? "opacity-100 translate-y-0 delay-100"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Home 1
+                    </NavLink>
+                    <NavLink
+                      to="/home2"
+                      className={`hover:text-(--custom-color) ${
+                        isHomeOpen
+                          ? "opacity-100 translate-y-0 delay-150"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Home 2
+                    </NavLink>
+                    <NavLink
+                      to="/home3"
+                      className={`hover:text-(--custom-color) ${
+                        isHomeOpen
+                          ? "opacity-100 translate-y-0 delay-200"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Home 3
+                    </NavLink>
+                  </div>
                 </li>
 
-                <li className="border-b border-(--custom-border) py-2 ">
-                  <NavLink
-                    to="/listing"
-                    className={({ isActive }) =>
-                      `flex items-center justify-between ${
-                        isActive
-                          ? "text-(--custom-color)"
-                          : "text-(--custom-black) hover:text-(--custom-color) transition-all duration-300"
-                      }`
-                    }
+                <li className="border-b border-(--custom-border) py-2">
+                  <div
+                    className="flex items-center justify-between cursor-pointer group"
+                    onClick={() => handleDropdown(setIsListingOpen)}
                   >
-                    Listing
-                    <FaAngleDown />
-                  </NavLink>
+                    <NavLink
+                      to="/listing"
+                      className={({ isActive }) =>
+                        `group-hover:text-(--custom-color) group-hover:transition-all group-hover:duration-100 ${
+                          isActive
+                            ? "text-(--custom-color)"
+                            : "text-(--custom-black)"
+                        }`
+                      }
+                    >
+                      Listing
+                    </NavLink>
+                    {isListingOpen ? <FaAngleUp /> : <FaAngleDown />}
+                  </div>
+
+                  <div
+                    className={`${
+                      isListingOpen
+                        ? "max-h-full opacity-100"
+                        : "max-h-0 opacity-0"
+                    } overflow-hidden transition-all duration-300 ease-in-out  pl-4 mt-2 flex flex-col space-y-1 border-l-[0.8px] border-l-(--custom-border)`}
+                  >
+                    <NavLink
+                      to="/home1"
+                      className={`hover:text-(--custom-color) ${
+                        isListingOpen
+                          ? "opacity-100 translate-y-0 delay-100"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Layout
+                    </NavLink>
+                    <NavLink
+                      to="/home2"
+                      className={`hover:text-(--custom-color) ${
+                        isListingOpen
+                          ? "opacity-100 translate-y-0 delay-150"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Feature
+                    </NavLink>
+                    <NavLink
+                      to="/home3"
+                      className={`hover:text-(--custom-color) ${
+                        isListingOpen
+                          ? "opacity-100 translate-y-0 delay-200"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Listing Details
+                    </NavLink>
+                  </div>
                 </li>
 
-                <li className="border-b border-(--custom-border) py-2 ">
-                  <NavLink
-                    to="/pages"
-                    className={({ isActive }) =>
-                      `flex items-center justify-between ${
-                        isActive
-                          ? "text-(--custom-color)"
-                          : "text-(--custom-black) hover:text-(--custom-color) transition-all duration-300"
-                      }`
-                    }
+                <li className="border-b border-(--custom-border) py-2">
+                  <div
+                    className="flex items-center justify-between cursor-pointer group"
+                    onClick={() => handleDropdown(setIsPageOpen)}
                   >
-                    Pages
-                    <FaAngleDown />
-                  </NavLink>
+                    <NavLink
+                      to="/pages"
+                      className={({ isActive }) =>
+                        `group-hover:text-(--custom-color) group-hover:transition-all group-hover:duration-100 ${
+                          isActive
+                            ? "text-(--custom-color)"
+                            : "text-(--custom-black)"
+                        }`
+                      }
+                    >
+                      Pages
+                    </NavLink>
+                    {isPageOpen ? <FaAngleUp /> : <FaAngleDown />}
+                  </div>
+
+                  <div
+                    className={`${
+                      isPageOpen
+                        ? "max-h-full opacity-100"
+                        : "max-h-0 opacity-0"
+                    } overflow-hidden transition-all duration-300 ease-in-out  pl-4 mt-2 flex flex-col space-y-1 border-l-[0.8px] border-l-(--custom-border)`}
+                  >
+                    <NavLink
+                      to="/agents"
+                      className={`hover:text-(--custom-color) ${
+                        isPageOpen
+                          ? "opacity-100 translate-y-0 delay-100"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Agents
+                    </NavLink>
+                    <NavLink
+                      to="/agencies"
+                      className={`hover:text-(--custom-color) ${
+                        isPageOpen
+                          ? "opacity-100 translate-y-0 delay-150"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Agencies
+                    </NavLink>
+                    <NavLink
+                      to="/career"
+                      className={`hover:text-(--custom-color) ${
+                        isPageOpen
+                          ? "opacity-100 translate-y-0 delay-200"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Career
+                    </NavLink>
+                    <NavLink
+                      to="/faq"
+                      className={`hover:text-(--custom-color) ${
+                        isPageOpen
+                          ? "opacity-100 translate-y-0 delay-250"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Faq's
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard"
+                      className={`hover:text-(--custom-color) ${
+                        isPageOpen
+                          ? "opacity-100 translate-y-0 delay-300"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Dashboard
+                    </NavLink>
+                  </div>
                 </li>
 
-                <li className="border-b border-(--custom-border) py-2 ">
-                  <NavLink
-                    to="/blogs"
-                    className={({ isActive }) =>
-                      `flex items-center justify-between ${
-                        isActive
-                          ? "text-(--custom-color)"
-                          : "text-(--custom-black) hover:text-(--custom-color) transition-all duration-300"
-                      }`
-                    }
+                <li className="border-b border-(--custom-border) py-2">
+                  <div
+                    className="flex items-center justify-between cursor-pointer group"
+                    onClick={() => handleDropdown(setIsBlogOpen)}
                   >
-                    Blogs
-                    <FaAngleDown />
-                  </NavLink>
+                    <NavLink
+                      to="/blog"
+                      className={({ isActive }) =>
+                        `group-hover:text-(--custom-color) group-hover:transition-all group-hover:duration-100 ${
+                          isActive
+                            ? "text-(--custom-color)"
+                            : "text-(--custom-black)"
+                        }`
+                      }
+                    >
+                      Blog
+                    </NavLink>
+                    {isBlogOpen ? <FaAngleUp /> : <FaAngleDown />}
+                  </div>
+
+                  <div
+                    className={`${
+                      isBlogOpen
+                        ? "max-h-full opacity-100"
+                        : "max-h-0 opacity-0"
+                    } overflow-hidden transition-all duration-300 ease-in-out  pl-4 mt-2 flex flex-col space-y-1 border-l-[0.8px] border-l-(--custom-border)`}
+                  >
+                    <NavLink
+                      to="/home1"
+                      className={`hover:text-(--custom-color) ${
+                        isBlogOpen
+                          ? "opacity-100 translate-y-0 delay-100"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Blog Grid
+                    </NavLink>
+                    <NavLink
+                      to="/home2"
+                      className={`hover:text-(--custom-color) ${
+                        isBlogOpen
+                          ? "opacity-100 translate-y-0 delay-150"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Blog List
+                    </NavLink>
+                    <NavLink
+                      to="/home3"
+                      className={`hover:text-(--custom-color) ${
+                        isBlogOpen
+                          ? "opacity-100 translate-y-0 delay-200"
+                          : "opacity-0 translate-y-4"
+                      } transition-all duration-300 ease-in-out`}
+                    >
+                      Blog Details
+                    </NavLink>
+                  </div>
                 </li>
 
-                <li className="border-b border-(--custom-border) py-2 ">
+                <li className="border-b border-(--custom-border) py-2">
                   <NavLink
                     to="/contact"
                     className={({ isActive }) =>
                       `flex items-center justify-between ${
                         isActive
                           ? "text-(--custom-color)"
-                          : "text-(--custom-black) hover:text-(--custom-color) transition-all duration-300"
+                          : "text-(--custom-black) hover:text-(--custom-color) transition-all duration-100"
                       }`
                     }
                   >
@@ -154,17 +358,17 @@ const Navbar = () => {
           <div className="flex flex-col space-y-4">
             <Link
               to={"/contact"}
-              className="text-sm font-medium underline hover:text-(--custom-color) transition-all duration-300"
+              className="text-sm font-medium underline hover:text-(--custom-color) transition-all duration-100"
             >
               Need help?
             </Link>
 
             <div className="flex flex-col space-y-2">
-              <p className="text-(--custom-gray) text-md font-semibold">
+              <p className="text-(--custom-gray) text-sm font-semibold">
                 Call Us Now:{" "}
                 <span className="text-(--custom-black)">1-555-678-8888</span>
               </p>
-              <p className="text-(--custom-gray) text-md font-semibold">
+              <p className="text-(--custom-gray) text-sm font-semibold">
                 Support 24/7:{" "}
                 <a
                   href="mailto:themesflat@gmail.com"
@@ -173,7 +377,7 @@ const Navbar = () => {
                   themesflat@gmail.com
                 </a>
               </p>
-              <p className="text-(--custom-gray) text-md font-semibold flex items-center space-x-2">
+              <p className="text-(--custom-gray) text-sm font-semibold flex items-center space-x-2">
                 <span>Follow us:</span>{" "}
                 <div className="flex items-center space-x-2 text-(--custom-black)">
                   <a href="#">
