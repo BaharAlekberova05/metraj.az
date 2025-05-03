@@ -7,6 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import { FaAngleDown, FaAngleUp, FaXTwitter } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
 import { CgMenu } from "react-icons/cg";
+import { LuLayoutDashboard } from "react-icons/lu";
 
 const Navbar = () => {
   const { isOpen, setIsOpen } = useContext(OpenContext);
@@ -14,13 +15,14 @@ const Navbar = () => {
   const { isListingOpen, setIsListingOpen } = useContext(OpenContext);
   const { isPageOpen, setIsPageOpen } = useContext(OpenContext);
   const { isBlogOpen, setIsBlogOpen } = useContext(OpenContext);
+  const { isThemesOpen, setIsThemesOpen } = useContext(OpenContext);
 
   const handleDropdown = (stateSetter) => {
     stateSetter((prevState) => !prevState);
   };
 
   return (
-    <div className="h-20 w-full p-4 flex items-center justify-between relative border">
+    <div className="h-20 w-full p-4 flex items-center justify-between border fixed relative top-0">
       <div className="w-[136px] h-[42px]">
         <img
           src="src/assets/img/logo.png"
@@ -342,8 +344,11 @@ const Navbar = () => {
         </div>
 
         {/* THEMESFLAT */}
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center justify-center border-[0.8px] border-[#ECECEC] rounded-md p-2 cursor-pointer">
+        <div
+          className="flex items-center space-x-3 cursor-pointer relative"
+          onClick={() => handleDropdown(setIsThemesOpen)}
+        >
+          <div className="flex items-center justify-center border-[0.8px] border-[#ECECEC] rounded-md p-2">
             <svg
               width={24}
               height={24}
@@ -361,10 +366,65 @@ const Navbar = () => {
             </svg>
           </div>
 
-          <div className="items-center space-x-1.5 cursor-pointer hidden md:flex">
+          <div className="items-center space-x-1.5 hidden md:flex">
             <span>Themesflat</span>
             <FaAngleDown />
           </div>
+
+          {/* THEMES DROPDOWN */}
+          {isThemesOpen && (
+            <div className="flex flex-col space-y-6 w-[250px] rounded-lg shadow-sm py-4 px-6 bg-white absolute top-14 right-0">
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <LuLayoutDashboard className="text-(--custom-gray)" />
+                <span className="text-(--custom-black)">Dashboards</span>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="slide-btn border border-(--custom-color) bg-transparent text-(--custom-color) items-center justify-center rounded-xl px-6 py-2 cursor-pointer hover:text-white hidden sm:flex">

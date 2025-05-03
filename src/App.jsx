@@ -10,6 +10,7 @@ const App = () => {
   const [isListingOpen, setIsListingOpen] = useState(false);
   const [isPageOpen, setIsPageOpen] = useState(false);
   const [isBlogOpen, setIsBlogOpen] = useState(false);
+  const [isThemesOpen, setIsThemesOpen] = useState(false);
 
   return (
     <Router>
@@ -25,6 +26,8 @@ const App = () => {
           setIsPageOpen,
           isBlogOpen,
           setIsBlogOpen,
+          isThemesOpen,
+          setIsThemesOpen,
         }}
       >
         <Navbar />
