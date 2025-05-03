@@ -53,14 +53,22 @@ const Navbar = () => {
           onClick={() => handleDropdown(setIsOpen)}
         />
 
+        {/* Overlay */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-black opacity-50 z-0"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
+
         {/* SIDEBAR */}
         <div
-          className={`bg-white z-10 absolute left-0 top-0 h-screen w-[400px] flex flex-col justify-between p-4 transition-all ease-in-out duration-500 transform border-r-[0.8px] border-(--custom-border) ${
+          className={`bg-white z-10 absolute left-0 top-0 h-screen w-[400px] flex flex-col justify-between transition-all ease-in-out duration-500 transform border-r-[0.8px] p-4 border-(--custom-border) shadow-xl flex-grow overflow-y-auto ${
             isOpen ? "left-0" : "left-[-100%]"
           }`}
         >
           {/* TOP SIDEBAR */}
-          <div>
+          <div className="">
             <div className="flex items-center justify-between">
               <div className="w-[136px] h-[42px]">
                 <img src="src/assets/img/logo.png" alt="Site logo" />
@@ -355,7 +363,7 @@ const Navbar = () => {
           </div>
 
           {/* BOTTOM SIDEBAR */}
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-4 py-4">
             <Link
               to={"/contact"}
               className="text-sm font-medium underline hover:text-(--custom-color) transition-all duration-100"
