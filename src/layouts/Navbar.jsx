@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="h-20 w-full p-4 flex items-center justify-between border fixed relative top-0">
+    <div className="h-20 w-full p-4 flex items-center justify-between fixed relative top-0">
       <div className="w-[136px] h-[42px]">
         <img
           src="src/assets/img/logo.png"
