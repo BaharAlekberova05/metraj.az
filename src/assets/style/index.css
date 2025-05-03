@@ -19,3 +19,31 @@
     scroll-behavior: smooth;
   }
 }
+
+.slide-btn {
+  transition: color 0.4s linear;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #f2695c;
+    z-index: -1;
+    transition: transform 0.5s ease-out, border-radius 0.3s ease-out;
+    transform-origin: 0 0;
+    transform: scaleX(0);
+  }
+
+  &:hover::before {
+    transform: scaleX(1);
+  }
+}

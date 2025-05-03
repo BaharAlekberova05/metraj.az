@@ -1,12 +1,12 @@
-import { CgMenu } from "react-icons/cg";
 import { OpenContext } from "../contexts/OpenContext";
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { BiLogoLinkedin } from "react-icons/bi";
-import { FiInstagram } from "react-icons/fi";
+import { FiInstagram, FiPhone } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import { FaAngleDown, FaAngleUp, FaXTwitter } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
+import { CgMenu } from "react-icons/cg";
 
 const Navbar = () => {
   const { isOpen, setIsOpen } = useContext(OpenContext);
@@ -30,26 +30,44 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center space-x-3">
-        <div className="flex items-center justify-center border-[0.8px] border-[#ECECEC] rounded-md p-2 cursor-pointer">
-          <svg
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15.749 6C15.749 6.99456 15.3539 7.94839 14.6507 8.65165C13.9474 9.35491 12.9936 9.75 11.999 9.75C11.0044 9.75 10.0506 9.35491 9.34735 8.65165C8.64409 7.94839 8.249 6.99456 8.249 6C8.249 5.00544 8.64409 4.05161 9.34735 3.34835C10.0506 2.64509 11.0044 2.25 11.999 2.25C12.9936 2.25 13.9474 2.64509 14.6507 3.34835C15.3539 4.05161 15.749 5.00544 15.749 6ZM4.5 20.118C4.53213 18.1504 5.33634 16.2742 6.73918 14.894C8.14202 13.5139 10.0311 12.7405 11.999 12.7405C13.9669 12.7405 15.856 13.5139 17.2588 14.894C18.6617 16.2742 19.4659 18.1504 19.498 20.118C17.1454 21.1968 14.5871 21.7535 11.999 21.75C9.323 21.75 6.783 21.166 4.5 20.118Z"
-              stroke="#2C2E33"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+        <div className="items-center space-x-2 hidden sm:flex">
+          <FiPhone className="text-xl text-(--custom-color)" />
+          <span className="text-(--custom-black) font-bold">
+            (603) 555-0123
+          </span>
+        </div>
+
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center justify-center border-[0.8px] border-[#ECECEC] rounded-md p-2 cursor-pointer">
+            <svg
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.749 6C15.749 6.99456 15.3539 7.94839 14.6507 8.65165C13.9474 9.35491 12.9936 9.75 11.999 9.75C11.0044 9.75 10.0506 9.35491 9.34735 8.65165C8.64409 7.94839 8.249 6.99456 8.249 6C8.249 5.00544 8.64409 4.05161 9.34735 3.34835C10.0506 2.64509 11.0044 2.25 11.999 2.25C12.9936 2.25 13.9474 2.64509 14.6507 3.34835C15.3539 4.05161 15.749 5.00544 15.749 6ZM4.5 20.118C4.53213 18.1504 5.33634 16.2742 6.73918 14.894C8.14202 13.5139 10.0311 12.7405 11.999 12.7405C13.9669 12.7405 15.856 13.5139 17.2588 14.894C18.6617 16.2742 19.4659 18.1504 19.498 20.118C17.1454 21.1968 14.5871 21.7535 11.999 21.75C9.323 21.75 6.783 21.166 4.5 20.118Z"
+                stroke="#2C2E33"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+
+          <div className="items-center space-x-1.5 cursor-pointer hidden md:flex">
+            <span>Themesflat</span>
+            <FaAngleDown />
+          </div>
+        </div>
+
+        <div className="slide-btn border border-(--custom-color) bg-transparent text-(--custom-color) items-center justify-center rounded-xl px-6 py-2 cursor-pointer hover:text-white hidden sm:flex">
+          Add property
         </div>
 
         <CgMenu
-          className="size-6 text-(--custom-color) cursor-pointer"
+          className="size-6 text-(--custom-color) cursor-pointer lg:hidden"
           onClick={() => handleDropdown(setIsOpen)}
         />
 
